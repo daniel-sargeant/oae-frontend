@@ -14,7 +14,7 @@ function App() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
-    const getPosts = async () => await fetch("http://localhost:3000/");
+    const getPosts = async () => await fetch("/api");
     getPosts()
       .then((res) => res.json())
       .then((p) => setPosts(p));

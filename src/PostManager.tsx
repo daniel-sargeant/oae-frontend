@@ -9,6 +9,7 @@ interface Post {
   created_at: string;
   updated_at?: string;
   content?: string;
+  published: boolean;
 }
 
 function PostManager() {
@@ -17,14 +18,14 @@ function PostManager() {
   const [currentPost, setCurrentPost] = useState<Post | null>(null);
 
   useEffect(() => {
-    const getPosts = () => fetch("http://localhost:3000/");
+    const getPosts = () => fetch("/api");
     getPosts()
       .then((res) => res.json())
       .then((p) => setPosts(p));
   }, []);
 
   const submitPost = async (body: string) =>
-    await fetch("http://localhost:3000/", {
+    await fetch("/api", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,6 +84,7 @@ function PostManager() {
             }
             value={markdownState}
           ></textarea>
+          <input type="checkbox" checked={currentPost?.published} />
         </form>
         <div className="preview">
           <Markdown remarkPlugins={[remarkGfm]}>{markdownState}</Markdown>
