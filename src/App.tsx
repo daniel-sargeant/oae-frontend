@@ -14,7 +14,7 @@ function App() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
-    const getPosts = async () => await fetch("/api");
+    const getPosts = async () => await fetch("/api/published");
     getPosts()
       .then((res) => res.json())
       .then((p) => setPosts(p));
